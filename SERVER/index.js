@@ -1,66 +1,97 @@
-const http = require('http'); // Built-in module to create a web server
+const http = require('http'); // Module to create server
 
-const fs = require('fs'); // Built-in module to work with files
+const fs = require('fs'); // Module to work with files
 
-const { error } = require('console'); // Not needed here (can be removed)
+const url = require('url'); // Module to parse URLs
 
 
-// Create an HTTP server
+
+// Create HTTP server
+
 const myServer = http.createServer((request, response) => {
 
-    // Create a log message
-    // Example:
-    // 1782918181818: /about New Req Received
+    // Create log entry
 
     const log = `${Date.now()}: ${request.url} New Req Received\n`;
 
 
-    // Append the log into log.txt
-    // This is asynchronous (non-blocking)
+    // Parse incoming URL
 
-    fs.appendFile('log.txt', log, (error, data) => {
+    // Example:
+    // /about?myname=shiva
 
-        // Handle different routes (URLs)
+    const myUrl = url.parse(request.url, true);
+    console.log(myUrl)
 
-        switch (request.url) {
+    // Save request information inside log.txt
+
+    fs.appendFile('log.txt', log, (error) => {
+
+        if (error) {
+            response.end("Something went wrong");
+            return;
+        }
+
+
+        // Route handling
+
+        switch (myUrl.pathname) {
 
             // localhost:8000/
 
             case '/':
+
                 response.end("Welcome to Homepage");
+
                 break;
 
 
-            // localhost:8000/about
+
+            // localhost:8000/about?myname=shiva
 
             case '/about':
-                response.end("About page");
+
+                // Read query parameter
+
+                const username = myUrl.query.myname;
+
+                response.end(`Hey there ${username}`);
+
                 break;
+
 
 
             // localhost:8000/contact
 
             case '/contact':
+
                 response.end("Contact Us");
+
                 break;
 
 
-            // Any unknown route
+
+            // Unknown routes
 
             default:
+
                 response.end("404 page not found");
-                break;
+
         }
 
     });
+
 
     console.log("New request response");
 
 });
 
 
-// Start server on port 8000
+
+// Start server
 
 myServer.listen(8000, () => {
+
     console.log("Server Started!");
+
 });
