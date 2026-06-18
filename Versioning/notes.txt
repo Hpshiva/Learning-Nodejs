@@ -1,0 +1,145 @@
+# Node.js Versioning (Very Simple Notes)
+
+## What is versioning?
+
+Versioning is a way to track changes in software.
+
+It tells us:
+
+- What changed?
+- Was a bug fixed?
+- Was a new feature added?
+- Did something break?
+
+----------------------------------------------------
+
+# Semantic Versioning (SemVer)
+
+Format:
+
+MAJOR.MINOR.PATCH
+
+Example:
+
+5.1.0
+
+5 -> Major
+1 -> Minor
+0 -> Patch
+
+----------------------------------------------------
+
+# PATCH (Bug Fix)
+
+5.1.0 -> 5.1.1
+
+- Small bug fixes
+- No new features
+- Existing code won't break
+
+----------------------------------------------------
+
+# MINOR (New Features)
+
+5.1.0 -> 5.2.0
+
+- New features added
+- Existing code still works
+
+----------------------------------------------------
+
+# MAJOR (Breaking Changes)
+
+5.1.0 -> 6.0.0
+
+- Big changes
+- Old code may stop working
+
+----------------------------------------------------
+
+# package.json
+
+Stores project information and dependencies.
+
+Example:
+
+{
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
+
+----------------------------------------------------
+
+# ^ (Caret)
+
+^5.1.0
+
+Allows:
+
+5.1.1 ✅
+5.2.0 ✅
+
+6.0.0 ❌
+
+Rule:
+
+Same MAJOR version only.
+
+----------------------------------------------------
+
+# ~ (Tilde)
+
+~5.1.0
+
+Allows:
+
+5.1.1 ✅
+
+5.2.0 ❌
+
+Rule:
+
+Only PATCH updates.
+
+----------------------------------------------------
+
+# Exact Version
+
+"5.1.0"
+
+Only:
+
+5.1.0 ✅
+
+----------------------------------------------------
+
+# package-lock.json
+
+Locks exact installed versions.
+
+Purpose:
+
+Everyone gets the same package versions.
+
+----------------------------------------------------
+
+# Check versions
+
+Node version:
+
+node -v
+
+NPM version:
+
+npm -v
+
+----------------------------------------------------
+
+# Easy way to remember
+
+PATCH = Bug Fix 🐞
+
+MINOR = New Feature ✨
+
+MAJOR = Breaking Change 💥
