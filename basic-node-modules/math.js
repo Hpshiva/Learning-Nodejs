@@ -6,5 +6,11 @@ function sub(a,b){
 }
 
 module.exports={
-    addOfTwo:add,subOfTwo:sub
+    addOfTwo:add,
+    ssubOfTwo:sub
 }
+
+
+
+// exports.add1=(a,b)=>a+b
+// exports.sub2=(a,b)=>a-b

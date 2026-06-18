@@ -1,5 +1,5 @@
-const math=require('./math')
+const math=require("./math")
+//require for import
 
-
-// 
-console.log(math)
+ 
+console.log(math.add1(4,5))
