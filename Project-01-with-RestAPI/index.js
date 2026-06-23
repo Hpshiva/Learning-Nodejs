@@ -1,8 +1,18 @@
 const express=require('express')
 const users=require('./Users_Mock_Data.json')
 const app=express()
-
+const fs=require('fs')
+const { error } = require('console')
 const port=8000
+
+// Middleware
+app.use(express.urlencoded({extended:false}))
+
+app.use((request,response,next)=>{
+    fs.appendFile('log.txt',`\n${Date.now()}:${request.method}:${request.path} -> ip:${request.ip}`,(error,data)=>{
+        next()
+    })
+})
 
 app.get('/users',(request,response)=>{
     const html=`
@@ -48,6 +58,17 @@ app.route('/api/users/:id')
         // Delete user with Id
         return response.json({status:"Pending"})
     })
+
+
+// Post
+app.post('/api/users',(request,response)=>{
+const body=request.body
+users.push({id:users.length+1,...body})
+fs.writeFile('./Users_Mock_Data.json',JSON.stringify(users),(error,data)=>{
+ return response.json({status:"Success", id:users.length})
+})
+   
+})
 
 // To run or listen on which port 
 app.listen({port},()=>console.log(`Server Started at ${port}`))

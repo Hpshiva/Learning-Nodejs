@@ -1,0 +1,6 @@
+1782200622680:GET:/users
+1782200637230:GET:/users
+1782200660847:POST:/api/users
+1782200707753:GET:/users -> ip:::1
+1782200718636:POST:/api/users -> ip:::1
+1782200725848:GET:/users -> ip:::1
