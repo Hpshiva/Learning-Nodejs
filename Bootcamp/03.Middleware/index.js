@@ -12,7 +12,7 @@ app.get("/", (req, res) => {
 });
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.post("/submit", (req, res) => {
+app.post("/formdata", (req, res) => {
   console.log(req.body);
 });
 app.listen(port, () => {
